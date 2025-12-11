@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Voice Assistant</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Malayalam:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <h1>College Voice Assistant</h1>
+            </div>
+            <div class="language-selector">
+                <button class="lang-btn active" data-lang="auto">
+                    <i class="fas fa-language"></i> Auto Detect
+                </button>
+                <button class="lang-btn" data-lang="en">
+                    <i class="fas fa-globe"></i> English
+                </button>
+                <button class="lang-btn" data-lang="ml">
+                    <i class="fas fa-language"></i> മലയാളം
+                </button>
+                <button class="lang-btn" data-lang="manglish">
+                    <i class="fas fa-keyboard"></i> Manglish
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Chat Container -->
+            <div class="chat-container">
+                <div class="chat-header">
+                    <h2><i class="fas fa-comments"></i> College Assistant</h2>
+                    <div class="connection-status">
+                        <span class="status-dot connected"></span>
+                        <span>Connected</span>
+                    </div>
+                </div>
+                
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Messages will appear here -->
+                    <div class="message bot">
+                        <div class="message-content">
+                            <strong>Assistant:</strong> Hello! I'm your college assistant. I can answer questions in Malayalam, English, or Manglish. How can I help you today?
+                        </div>
+                        <div class="message-time">Just now</div>
+                    </div>
+                </div>
+                
+                <!-- Input Area -->
+                <div class="input-area">
+                    <div class="input-group">
+                        <input type="text" 
+                               id="messageInput" 
+                               placeholder="Type your question here... or click the mic to speak"
+                               autocomplete="off">
+                        <div class="input-buttons">
+                            <button id="voiceBtn" class="voice-btn">
+                                <i class="fas fa-microphone"></i>
+                            </button>
+                            <button id="sendBtn" class="send-btn">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="voice-status" id="voiceStatus">
+                        <i class="fas fa-circle recording"></i>
+                        <span>Listening...</span>
+                    </div>
+                </div>
+                
+                <!-- Voice Instructions -->
+                <div class="voice-instructions">
+                    <h3><i class="fas fa-info-circle"></i> Try asking:</h3>
+                    <div class="example-questions">
+                        <button class="example-btn" data-question="Hostel fees ethra anu?">
+                            "Hostel fees ethra anu?"
+                        </button>
+                        <button class="example-btn" data-question="ഹോസ്റ്റൽ ഫീസ് എത്രയാണ്?">
+                            "ഹോസ്റ്റൽ ഫീസ് എത്രയാണ്?"
+                        </button>
+                        <button class="example-btn" data-question="When is the library open?">
+                            "When is the library open?"
+                        </button>
+                        <button class="example-btn" data-question="Principal office evide anu?">
+                            "Principal office evide anu?"
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Panel -->
+            <div class="info-panel">
+                <div class="panel-section">
+                    <h3><i class="fas fa-volume-up"></i> Voice Commands</h3>
+                    <ul class="commands-list">
+                        <li><span class="command">Click Mic</span> - Start voice input</li>
+                        <li><span class="command">Speak Clearly</span> - For better recognition</li>
+                        <li><span class="command">Language Auto-detection</span> - Supports 3 languages</li>
+                    </ul>
+                </div>
+                
+                <div class="panel-section">
+                    <h3><i class="fas fa-lightbulb"></i> Quick Tips</h3>
+                    <ul class="tips-list">
+                        <li>Ask about fees, timings, facilities</li>
+                        <li>Use Malayalam, English, or Manglish</li>
+                        <li>Works on mobile & desktop</li>
+                        <li>No installation required</li>
+                    </ul>
+                </div>
+                
+                <div class="panel-section">
+                    <h3><i class="fas fa-cog"></i> System Status</h3>
+                    <div class="status-items">
+                        <div class="status-item">
+                            <span class="status-label">Backend:</span>
+                            <span class="status-value" id="backendStatus">Connected</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-label">Voice API:</span>
+                            <span class="status-value" id="voiceStatusIndicator">Available</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-label">Knowledge Base:</span>
+                            <span class="status-value" id="kbStatus">Loaded</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="admin-btn" id="adminPanelBtn">
+                    <i class="fas fa-user-shield"></i> Admin Panel
+                </button>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>College Voice Assistant | Powered by Google Gemini AI & RAG | Supports Malayalam, English & Manglish</p>
+            <p class="footer-links">
+                <a href="#" id="privacyLink">Privacy</a> | 
+                <a href="#" id="aboutLink">About</a> | 
+                <a href="#" id="docsLink">Documentation</a>
+            </p>
+        </footer>
+    </div>
+
+    <!-- Admin Modal -->
+    <div class="modal" id="adminModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-user-shield"></i> Admin Panel</h2>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="add-doc">Add Document</button>
+                    <button class="tab-btn" data-tab="view-docs">View Documents</button>
+                    <button class="tab-btn" data-tab="system-logs">System Logs</button>
+                </div>
+                
+                <div class="tab-content active" id="add-doc-tab">
+                    <h3>Add New Knowledge</h3>
+                    <form id="addDocumentForm">
+                        <div class="form-group">
+                            <label for="englishText">English Version *</label>
+                            <textarea id="englishText" placeholder="Enter information in English" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="malayalamText">Malayalam Version *</label>
+                            <textarea id="malayalamText" placeholder="മലയാളത്തിൽ വിവരങ്ങൾ നൽകുക" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="manglishText">Manglish Version (Optional)</label>
+                            <textarea id="manglishText" placeholder="Manglish version if needed"></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-plus-circle"></i> Add to Knowledge Base
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="tab-content" id="view-docs-tab">
+                    <h3>Knowledge Base Documents</h3>
+                    <div class="documents-list" id="documentsList">
+                        <!-- Documents will be loaded here -->
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="system-logs-tab">
+                    <h3>System Logs</h3>
+                    <div class="logs-container" id="logsContainer">
+                        <!-- Logs will appear here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Player (hidden) -->
+    <audio id="responseAudio" style="display: none;"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
