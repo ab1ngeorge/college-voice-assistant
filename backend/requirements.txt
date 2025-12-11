@@ -1,0 +1,37 @@
+# Core web framework
+fastapi==0.104.1
+uvicorn==0.24.0
+python-multipart==0.0.6
+
+# AI and ML
+sentence-transformers==2.2.2
+huggingface-hub==0.20.1
+numpy==1.24.3
+scipy==1.11.1  # Downgraded to be compatible with numpy 1.24.3
+transformers==4.36.2
+
+# Database and embeddings
+chromadb==0.4.18
+pypika==0.48.9
+
+# Google AI
+google-generativeai==0.3.1
+protobuf==4.25.3
+
+# Language processing
+langdetect==1.0.9
+nltk==3.8.1
+
+# Voice and audio
+speechrecognition==3.10.0
+gtts==2.4.0
+pydub==0.25.1
+
+# Data handling
+jsonlines==4.0.0
+aiofiles==23.2.1
+
+# Pydantic
+pydantic==2.5.0
+pydantic-settings==2.1.0
+pydantic-core==2.14.1
